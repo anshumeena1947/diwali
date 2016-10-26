@@ -1,0 +1,120 @@
+body {
+  font-family: "Lato";
+  background-color: #1a1a1a;
+  color: #fff; }
+
+.pollution-meter {
+  position: relative;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2em;
+  margin-top: 6em; }
+  .pollution-meter svg {
+    margin-left: auto;
+    margin-right: auto; }
+    .pollution-meter svg rect {
+      stroke: none; }
+  .pollution-meter domain {
+    display: none; }
+  .pollution-meter .axis .tick line {
+    stroke: #ddd; }
+  .pollution-meter .axis text {
+    fill: #ddd; }
+
+h1 {
+  font-size: 2.3em;
+  font-family: 'PT Serif';
+  line-height: 1.8em;
+  max-width: 700px;
+  width: 90%;
+  text-align: center;
+  font-weight: 500;
+  margin: 1em auto; }
+  @media (max-width: 600px) {
+    h1 {
+      font-size: 2em;
+      line-height: 1.3em; } }
+
+.intro {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
+  font-size: 1.1em;
+  line-height: 1.6em;
+  color: #bbb; }
+
+h3.byline {
+  font-style: italic;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 500;
+  margin-bottom: 3em;
+  color: #bbb; }
+
+.crackers-container {
+  text-align: center; }
+
+.cracker-con {
+  width: 250px;
+  height: 146px;
+  cursor: pointer;
+  /*border-bottom: solid 2px #1a1a1a;*/ }
+
+.cracker-con:hover {
+  /*border-bottom: solid 2px #fff;*/ }
+
+.cracker-con[data-which="ladi"] {
+  background: url("/illustrations/lori.png");
+  background-size: cover; }
+
+.cracker-con[data-which="anar"] {
+  background: url("/illustrations/anar-01.png");
+  width: 400px;
+  height: 234px;
+  background-size: cover; }
+
+.cracker-con[data-which="fuljhadi"] {
+  background: url("/illustrations/fuljhadi.png");
+  background-size: cover; }
+
+.cracker-con {
+  display: inline-block;
+  margin: 0.2em;
+  cursor: pointer;
+  vertical-align: bottom; }
+
+.cracker {
+  min-width: 100px;
+  min-height: 60px;
+  display: inline-block;
+  margin: 1em;
+  border: solid 1px;
+  vertical-align: center;
+  padding-top: 40px;
+  cursor: pointer; }
+
+.cracker:hover {
+  background-color: #3a3a3a;
+  color: #fff; }
+
+.cal-arrow-label {
+  text-align: left;
+  position: absolute;
+  width: 300px;
+  color: #eee;
+  top: 0;
+  margin-top: -30px;
+  line-height: 10px;
+  font-size: 15px; }
+  .cal-arrow-label .cal-label-arrow {
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #eee;
+    margin-top: 7px; }
+
+/*# sourceMappingURL=styles.css.map*/
