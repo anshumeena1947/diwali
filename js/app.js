@@ -1,6 +1,7 @@
 require("../css/styles.scss");
 d3 = require("d3")
-$ = jQuery = require("jQuery")
+// $ = jQuery = require("jQuery")
+// require('../slick/slick.js')
 _ = require("underscore")
 
 var current_exposure = 80
@@ -270,3 +271,43 @@ function cleartimer(e,obj){
       console.log(e)
   },obj.effect * 60 * 1000)
 }
+
+$('.crackers-container').slick({
+  dots: false,
+  infinite: true,
+  speed: 300,
+  arrow: true,
+  slidesToShow: 6,
+  responsive: [
+    {
+      breakpoint: 1400,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 982,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+  ]
+});

@@ -97,6 +97,10 @@ h3.byline.dateline {
   height: 146px;
   cursor: pointer;
   /*border-bottom: solid 2px #1a1a1a;*/ }
+  @media (max-width: 600px) {
+    .cracker-con {
+      margin-left: auto;
+      margin-right: auto; } }
 
 .cracker-con:hover {
   /*border-bottom: solid 2px #fff;*/ }
@@ -106,9 +110,7 @@ h3.byline.dateline {
   background-size: cover; }
 
 .cracker-con[data-which="anar"] {
-  background: url("/illustrations/anar-01.png");
-  width: 400px;
-  height: 234px;
+  background: url("/illustrations/anar.png");
   background-size: cover; }
 
 .cracker-con[data-which="fuljhadi"] {
@@ -123,16 +125,47 @@ h3.byline.dateline {
   background: url("/illustrations/pulpul.png");
   background-size: cover; }
 
+.cracker-con[data-which="snake"] {
+  background: url("/illustrations/snake.png");
+  background-size: cover; }
+
 .cal-move-arrow {
   -webkit-transition: left 0.01s;
   /* Safari */
   transition: left 0.01s; }
 
-.cracker-con {
+.clean-air {
+  margin: 2em;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  padding: 0.5em;
+  width: 95%;
+  max-width: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  color: #1a1a1a;
+  background-color: #eee;
+  cursor: pointer;
+  -webkit-transition: all 0.3s;
+  /* Safari */
+  transition: all 0.3s; }
+
+.clean-air:hover {
+  color: #eee;
+  background-color: #1a1a1a; }
+
+.cracker-outer {
+  width: 250px;
+  height: 146px;
+  text-align: center;
   display: inline-block;
-  margin: 0.2em;
+  margin: 1em 0.2em;
   cursor: pointer;
   vertical-align: bottom; }
+  .cracker-outer p {
+    color: #ddd;
+    font-style: italic; }
 
 .cal-arrow-label {
   text-align: left;
@@ -190,5 +223,30 @@ h3.byline.dateline {
       display: inline-block; }
     .nav .nav-logo.desktop {
       display: none; } }
+
+ul.slick-dots {
+  display: none !important; }
+
+.crackers-container {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto; }
+  @media (max-width: 600px) {
+    .crackers-container {
+      width: 70%; } }
+
+/*.crackers-container.mobile{
+    display: none
+}
+
+
+@media(max-width:450px){
+    .crackers-container.desktop{
+        display: none
+    }
+    .crackers-container.mobile{
+        display: block
+    }
+}*/
 
 /*# sourceMappingURL=styles.css.map*/
