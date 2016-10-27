@@ -1,7 +1,14 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0; }
+
 body {
   font-family: "Lato";
   background-color: #1a1a1a;
-  color: #fff; }
+  color: #fff;
+  padding-bottom: 200px; }
 
 .pollution-meter {
   position: relative;
@@ -22,6 +29,20 @@ body {
   .pollution-meter .axis text {
     fill: #ddd; }
 
+.current-level-container {
+  text-align: center;
+  margin-top: 2em;
+  color: #ccc; }
+  .current-level-container .current-level {
+    font-size: 3em;
+    color: #fff; }
+  .current-level-container .ins {
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 0.5em;
+    border-bottom: 0.5px solid #aaa; }
+
 h1 {
   font-size: 2.3em;
   font-family: 'PT Serif';
@@ -37,13 +58,17 @@ h1 {
       line-height: 1.3em; } }
 
 .intro {
-  max-width: 800px;
+  max-width: 700px;
+  text-align: center;
   margin-left: auto;
   margin-right: auto;
-  width: 95%;
-  font-size: 1.1em;
+  width: 90%;
+  font-size: 1.2em;
   line-height: 1.6em;
-  color: #bbb; }
+  color: #ccc; }
+  @media (max-width: 750px) {
+    .intro {
+      font-size: 1.1em; } }
 
 h3.byline {
   font-style: italic;
@@ -51,8 +76,18 @@ h3.byline {
   margin-left: auto;
   margin-right: auto;
   font-weight: 500;
+  margin-bottom: 0.8em;
+  color: #ccc;
+  font-size: 1.4em; }
+
+h3.byline.malay {
+  margin-bottom: 2em;
+  font-size: 1.1em;
+  font-weight: 200; }
+
+h3.byline.dateline {
   margin-bottom: 3em;
-  color: #bbb; }
+  font-size: 1.1em; }
 
 .crackers-container {
   text-align: center; }
@@ -80,25 +115,24 @@ h3.byline {
   background: url("/illustrations/fuljhadi.png");
   background-size: cover; }
 
+.cracker-con[data-which="chakri"] {
+  background: url("/illustrations/chakri.png");
+  background-size: cover; }
+
+.cracker-con[data-which="pulpul"] {
+  background: url("/illustrations/pulpul.png");
+  background-size: cover; }
+
+.cal-move-arrow {
+  -webkit-transition: left 0.01s;
+  /* Safari */
+  transition: left 0.01s; }
+
 .cracker-con {
   display: inline-block;
   margin: 0.2em;
   cursor: pointer;
   vertical-align: bottom; }
-
-.cracker {
-  min-width: 100px;
-  min-height: 60px;
-  display: inline-block;
-  margin: 1em;
-  border: solid 1px;
-  vertical-align: center;
-  padding-top: 40px;
-  cursor: pointer; }
-
-.cracker:hover {
-  background-color: #3a3a3a;
-  color: #fff; }
 
 .cal-arrow-label {
   text-align: left;
@@ -116,5 +150,45 @@ h3.byline {
     border-right: 8px solid transparent;
     border-top: 8px solid #eee;
     margin-top: 7px; }
+
+.story {
+  padding-top: 4em; }
+
+.nav {
+  color: #3a3a3a;
+  height: 40px;
+  background-color: #fff;
+  width: 100%;
+  position: fixed;
+  z-index: 500;
+  padding: 0.2em;
+  top: 0; }
+  .nav a {
+    color: inherit; }
+  .nav .nav-logo {
+    padding-left: .3em;
+    vertical-align: middle;
+    height: 60%;
+    margin-top: 4px; }
+  .nav .nav-logo.mobile {
+    display: none; }
+  .nav .nav-logo.desktop {
+    vertical-align: middle;
+    display: inline-block; }
+  .nav .right-container {
+    position: absolute;
+    right: 28px;
+    top: 4px;
+    font-size: 1.4em; }
+    .nav .right-container i {
+      margin-left: 8px; }
+    @media (max-width: 750px) {
+      .nav .right-container {
+        right: 14px; } }
+  @media (max-width: 750px) {
+    .nav .nav-logo.mobile {
+      display: inline-block; }
+    .nav .nav-logo.desktop {
+      display: none; } }
 
 /*# sourceMappingURL=styles.css.map*/

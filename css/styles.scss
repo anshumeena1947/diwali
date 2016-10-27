@@ -1,12 +1,20 @@
 $font: 'Lato';
 $darkgrey: #3a3a3a;
 $back: #1a1a1a;
-$text: #bbb;
+$text: #ccc;
+
+*{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0
+}
 
 body{ 
     font-family: $font;
     background-color: $back;
     color: #fff;
+    padding-bottom: 200px;
 }
 
 .pollution-meter{
@@ -36,6 +44,23 @@ body{
     }
 }
 
+.current-level-container{
+    text-align: center;
+    margin-top: 2em;
+    color: $text;
+    .current-level{
+        font-size: 3em;
+        color: #fff;
+    }
+    .ins{
+        width: 150px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-bottom: 0.5em;
+        border-bottom: 0.5px solid #aaa
+    }
+}
+
 h1{
     font-size: 2.3em;
     font-family: 'PT Serif';
@@ -52,13 +77,17 @@ h1{
 }
 
 .intro{
-    max-width: 800px;
+    max-width: 700px;
+    text-align: center;
     margin-left: auto;
     margin-right: auto;
-    width: 95%;
-    font-size: 1.1em;
+    width: 90%;
+    font-size: 1.2em;
     line-height: 1.6em;
     color: $text;
+    @media(max-width: 750px){
+        font-size: 1.1em;
+    }
 }
 
 h3.byline{
@@ -67,10 +96,22 @@ h3.byline{
     margin-left: auto;
     margin-right: auto;
     font-weight: 500;
-    margin-bottom: 3em;
+    margin-bottom: 0.8em;
     color: $text;
+    font-size: 1.4em;
 }
 
+h3.byline.malay{
+    margin-bottom: 2em;
+    font-size: 1.1em;
+     font-weight: 200;
+}
+
+h3.byline.dateline{
+     margin-bottom: 3em;
+    font-size: 1.1em;
+
+}
 .crackers-container{
     text-align: center;
 }
@@ -94,7 +135,7 @@ h3.byline{
 .cracker-con[data-which="anar"]{
     background: url('/illustrations/anar-01.png');
     width: 400px;
-     height: 234px;
+    height: 234px;
     background-size: cover;
 }
 
@@ -103,27 +144,26 @@ h3.byline{
     background-size: cover;
 }
 
+.cracker-con[data-which="chakri"]{
+    background: url('/illustrations/chakri.png');
+    background-size: cover;
+}
+
+.cracker-con[data-which="pulpul"]{
+    background: url('/illustrations/pulpul.png');
+    background-size: cover;
+}
+
+.cal-move-arrow{
+    -webkit-transition: left 0.01s; /* Safari */
+    transition: left 0.01s;
+}
+
 .cracker-con{
     display: inline-block;
     margin: 0.2em;
     cursor: pointer;
     vertical-align: bottom;
-}
-
-.cracker{
-    min-width: 100px;
-    min-height: 60px;
-    display: inline-block;
-    margin: 1em;
-    border: solid 1px;
-    vertical-align: center;
-    padding-top: 40px;
-    cursor: pointer;
-}
-
-.cracker:hover{
-    background-color: $darkgrey;
-    color: #fff;
 }
 
 .cal-arrow-label{
@@ -142,5 +182,54 @@ h3.byline{
         border-right: 8px solid transparent;
         border-top: 8px solid #eee;
         margin-top: 7px;
+    }
+}
+.story{
+    padding-top: 4em;
+}
+.nav {
+    color: $darkgrey;
+    height: 40px;
+    background-color: #fff;
+    width: 100%;
+    position: fixed;
+    z-index: 500;
+    padding: 0.2em;
+    top: 0;
+    a{
+        color: inherit;
+    }
+    .nav-logo {
+        padding-left: .3em;
+        vertical-align: middle;
+        height: 60%;
+        margin-top: 4px;
+    }
+    .nav-logo.mobile {
+        display: none;
+    }
+    .nav-logo.desktop {
+        vertical-align: middle;
+        display: inline-block;
+    }
+    .right-container {
+        position: absolute;
+        right: 28px;
+        top: 4px;
+        font-size: 1.4em;
+        i{
+            margin-left: 8px;
+        }
+        @media(max-width: 750px){
+            right: 14px;
+        }
+    }
+    @media(max-width: 750px){
+        .nav-logo.mobile {
+            display: inline-block;
+        }
+        .nav-logo.desktop {
+            display: none;
+        }
     }
 }

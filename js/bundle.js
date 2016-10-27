@@ -45,9 +45,9 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
-	d3 = __webpack_require__(2)
-	$ = jQuery = __webpack_require__(3)
-	_ = __webpack_require__(4)
+	d3 = __webpack_require__(3)
+	$ = jQuery = __webpack_require__(4)
+	_ = __webpack_require__(5)
 	
 	var current_exposure = 80
 	
@@ -58,30 +58,12 @@
 	       'max': 36,
 	       'color':'#76C2AC'
 	   },
-	   // {
-	   //    'name':'satisfactory',
-	   //    'min':18,
-	   //    'max':36,
-	   //    'color': '#00823F'
-	   // },
 	   {
 	      'name':'moderate',
 	      'min':36.5,
 	      'max':66,
 	      'color': '#FAE290'
 	   },
-	   // {
-	   //    'name':'poor',
-	   //    'min':54,
-	   //    'max':66,
-	   //    'color': '#CEDA00'
-	   // },
-	   // {
-	   //    'name':'verypoor',
-	   //    'min':66,
-	   //    'max':105,
-	   //    'color': '#AD001E'
-	   // },
 	   {
 	      'name':'severe',
 	      'min':105,
@@ -161,6 +143,8 @@
 	d3.select('.cal-arrow-label')
 	      .attr('style', "left:"+xScale(current_exposure)+"px;")
 	
+	$('.current-level').html(current_exposure)
+	
 	var cracker_data = [
 	    {
 	        'cracker': 'anar',
@@ -211,9 +195,7 @@
 	        'anar':0
 	    }
 	
-	var newinterval 
 	$('.cracker-con').on('click',function(){
-	   
 	  
 	   var obj = _.findWhere(cracker_data,{cracker: ($(this).attr('data-which'))})
 	    
@@ -255,8 +237,7 @@
 	    }, (obj.burning * 60 * 1000));
 	
 	    setTimeout(function(){ 
-	
-	        newinterval = setInterval(function(){
+	        intervals[sum(crackerCounter)] = setInterval(function(){
 	        
 	           current_exposure = current_exposure - Math.round(obj.pol/(obj.effect*60*1/0.1))
 	           
@@ -275,10 +256,9 @@
 	
 	    }, 2000);
 	
-	    setTimeout(function(){
-	        console.log('finished effect')
-	        clearInterval(newinterval)
-	    },obj.effect * 60 * 1000)
+	    cleartimer(intervals[sum(crackerCounter)-1],obj)
+	
+	
 	
 	   d3.select('.current-level-line')
 	      .transition()
@@ -291,10 +271,7 @@
 	      .duration(1500)
 	      .attr('style', "left:"+xScale(current_exposure)+"px;")
 	
-	})
-	
-	$('.cracker-con').on('click',function(e){
-	   var back_pos = parseInt($(this).css('background-position').split(' ')[1].split('px')[0])
+	    var back_pos = parseInt($(this).css('background-position').split(' ')[1].split('px')[0])
 	   var cracker = $(this).attr('data-which')
 	   var minus = parseInt($(this).attr('data-minus'))
 	   var myint = setInterval(function(){
@@ -308,6 +285,7 @@
 	         clearInterval(myint)
 	      }
 	   },500)
+	
 	})
 	
 	$('.cracker-con').on('mouseover',function(e){
@@ -318,6 +296,26 @@
 	$('.cracker-con').on('mouseout',function(e){
 	   $(this).css('background-position',('0 0'))
 	})
+	
+	// functions go here
+	
+	function sum(obj) {
+	  var sum = 0;
+	  for( var el in obj ) {
+	    if( obj.hasOwnProperty( el ) ) {
+	      sum += parseFloat( obj[el] );
+	    }
+	  }
+	  return sum;
+	}
+	
+	function cleartimer(e,obj){
+	  setTimeout(function(){
+	      console.log('finished effect')
+	      clearInterval(e)
+	      console.log(e)
+	  },obj.effect * 60 * 1000)
+	}
 
 /***/ },
 /* 1 */
@@ -326,7 +324,8 @@
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 2 */
+/* 2 */,
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// https://d3js.org Version 4.2.8. Copyright 2016 Mike Bostock.
@@ -16645,7 +16644,7 @@
 
 
 /***/ },
-/* 3 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -26465,7 +26464,7 @@
 
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscore.js 1.8.3

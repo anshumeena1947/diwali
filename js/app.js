@@ -12,30 +12,12 @@ var scales = [
        'max': 36,
        'color':'#76C2AC'
    },
-   // {
-   //    'name':'satisfactory',
-   //    'min':18,
-   //    'max':36,
-   //    'color': '#00823F'
-   // },
    {
       'name':'moderate',
       'min':36.5,
       'max':66,
       'color': '#FAE290'
    },
-   // {
-   //    'name':'poor',
-   //    'min':54,
-   //    'max':66,
-   //    'color': '#CEDA00'
-   // },
-   // {
-   //    'name':'verypoor',
-   //    'min':66,
-   //    'max':105,
-   //    'color': '#AD001E'
-   // },
    {
       'name':'severe',
       'min':105,
@@ -115,6 +97,8 @@ chart.append("g")
 d3.select('.cal-arrow-label')
       .attr('style', "left:"+xScale(current_exposure)+"px;")
 
+$('.current-level').html(current_exposure)
+
 var cracker_data = [
     {
         'cracker': 'anar',
@@ -165,9 +149,7 @@ var crackerCounter = {
         'anar':0
     }
 
-var newinterval 
 $('.cracker-con').on('click',function(){
-   
   
    var obj = _.findWhere(cracker_data,{cracker: ($(this).attr('data-which'))})
     
@@ -209,8 +191,7 @@ $('.cracker-con').on('click',function(){
     }, (obj.burning * 60 * 1000));
 
     setTimeout(function(){ 
-
-        newinterval = setInterval(function(){
+        intervals[sum(crackerCounter)] = setInterval(function(){
         
            current_exposure = current_exposure - Math.round(obj.pol/(obj.effect*60*1/0.1))
            
@@ -229,10 +210,9 @@ $('.cracker-con').on('click',function(){
 
     }, 2000);
 
-    setTimeout(function(){
-        console.log('finished effect')
-        clearInterval(newinterval)
-    },obj.effect * 60 * 1000)
+    cleartimer(intervals[sum(crackerCounter)-1],obj)
+
+
 
    d3.select('.current-level-line')
       .transition()
@@ -245,10 +225,7 @@ $('.cracker-con').on('click',function(){
       .duration(1500)
       .attr('style', "left:"+xScale(current_exposure)+"px;")
 
-})
-
-$('.cracker-con').on('click',function(e){
-   var back_pos = parseInt($(this).css('background-position').split(' ')[1].split('px')[0])
+    var back_pos = parseInt($(this).css('background-position').split(' ')[1].split('px')[0])
    var cracker = $(this).attr('data-which')
    var minus = parseInt($(this).attr('data-minus'))
    var myint = setInterval(function(){
@@ -262,6 +239,7 @@ $('.cracker-con').on('click',function(e){
          clearInterval(myint)
       }
    },500)
+
 })
 
 $('.cracker-con').on('mouseover',function(e){
@@ -272,3 +250,23 @@ $('.cracker-con').on('mouseover',function(e){
 $('.cracker-con').on('mouseout',function(e){
    $(this).css('background-position',('0 0'))
 })
+
+// functions go here
+
+function sum(obj) {
+  var sum = 0;
+  for( var el in obj ) {
+    if( obj.hasOwnProperty( el ) ) {
+      sum += parseFloat( obj[el] );
+    }
+  }
+  return sum;
+}
+
+function cleartimer(e,obj){
+  setTimeout(function(){
+      console.log('finished effect')
+      clearInterval(e)
+      console.log(e)
+  },obj.effect * 60 * 1000)
+}
