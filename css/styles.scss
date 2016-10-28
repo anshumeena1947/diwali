@@ -14,7 +14,6 @@ body{
     font-family: $font;
     background-color: $back;
     color: #fff;
-    padding-bottom: 200px;
 }
 
 .pollution-meter{
@@ -31,6 +30,7 @@ body{
     margin-right: auto;
     margin-bottom: 2em;
     margin-top: 6em;
+    width: 95%;
     domain{
         display: none;
     }
@@ -41,6 +41,10 @@ body{
         text{
             fill: #ddd;
         }
+    }
+    @media(max-width: 800px){
+        margin-bottom: 1em;
+        margin-top: 2em;
     }
 }
 
@@ -127,37 +131,41 @@ h3.byline.dateline{
     }
 }
 
+.cracker-outer.slick-slide.slick-active:focus {
+    outline: none;
+}
+
 .cracker-con:hover{
     /*border-bottom: solid 2px #fff;*/
 }
 
 .cracker-con[data-which="ladi"]{
-    background: url('/illustrations/lori.png');
+    background: url('/img/lori.png');
     background-size: cover;
 }
 
 .cracker-con[data-which="anar"]{
-    background: url('/illustrations/anar.png');
+    background: url('/img/anar.png');
     background-size: cover;
 }
 
 .cracker-con[data-which="fuljhadi"]{
-    background: url('/illustrations/fuljhadi.png');
+    background: url('/img/fuljhadi.png');
     background-size: cover;
 }
 
 .cracker-con[data-which="chakri"]{
-    background: url('/illustrations/chakri.png');
+    background: url('/img/chakri.png');
     background-size: cover;
 }
 
 .cracker-con[data-which="pulpul"]{
-    background: url('/illustrations/pulpul.png');
+    background: url('/img/pulpul.png');
     background-size: cover;
 }
 
 .cracker-con[data-which="snake"]{
-    background: url('/illustrations/snake.png');
+    background: url('/img/snake.png');
     background-size: cover;
 }
 
@@ -168,7 +176,7 @@ h3.byline.dateline{
 
 .clean-air{
     margin: 2em;
-    border: 1px solid #eee;
+    border: 1px solid #fff;
     border-radius: 5px;
     padding: 0.5em;
     width: 95%;
@@ -177,14 +185,14 @@ h3.byline.dateline{
     margin-right: auto;
     text-align: center;
     color: #1a1a1a;
-    background-color: #eee;
+    background-color: #fff;
     cursor: pointer;
     -webkit-transition: all 0.3s; /* Safari */
     transition: all 0.3s;
 }
 
 .clean-air:hover{
-    color: #eee;
+    color: #fff;
     background-color: $back;
 }
 
@@ -219,6 +227,9 @@ h3.byline.dateline{
         border-right: 8px solid transparent;
         border-top: 8px solid #eee;
         margin-top: 7px;
+    }
+    @media(max-width: 800px){
+         width: 30%;
     }
 }
 .story{
@@ -282,6 +293,39 @@ ul.slick-dots{
     @media(max-width: 600px){
          width: 70%;
     }
+}
+
+.slick-prev:before, .slick-next:before {
+    font-size: 28px;
+}
+
+.footer-basic-centered {
+    background-color: #fff;
+    color: #1a1a1a;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.12);
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
+    font: normal 20px 'Lato',sans-serif;
+    padding: 40px;
+    margin-top: 6em;
+    a{
+        color: $back!important;
+    }
+}
+footer {
+    margin-bottom: -30px;
+}
+
+.notes{
+    max-width: 1000px;
+    width: 90%;
+    margin-top: 6em;
+    margin-left: auto;
+    margin-right: auto;
+    color: $text;
+    padding-top: 2em;
+    border-top: solid 0.5px rgba(231,231,231,0.3)
 }
 
 /*.crackers-container.mobile{
