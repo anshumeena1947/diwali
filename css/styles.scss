@@ -309,15 +309,12 @@ h3.byline.dateline{
     .cal-label-text{
         @media(max-width: 600px){
             font-size: 0.9em;
-            width: 100px;
-            text-align: right;
-            
+            width: 10px;
+            text-align: right;  
 
         }
         @media(max-width: 500px){
-            width: 50px;
             font-size: 0.8em;
-            /*margin-left: -40px;*/
         }
     }
     @media(max-width: 800px){
@@ -325,7 +322,7 @@ h3.byline.dateline{
     }
     @media(max-width: 600px){
         margin-top: -50px;
-        width: 50px;
+        width: 10px;
     }
     @media(max-width: 500px){
         margin-top: -50px;
@@ -333,6 +330,9 @@ h3.byline.dateline{
 }
 .story{
     padding-top: 4em;
+    @media(max-width: 450px){
+        padding-top: 2em
+    }
 }
 .nav {
     color: $darkgrey;
@@ -378,6 +378,9 @@ h3.byline.dateline{
         .nav-logo.desktop {
             display: none;
         }
+    }
+    @media(max-width: 450px){
+        position: static;
     }
 }
 
@@ -466,16 +469,31 @@ footer {
         display: inline-block;
     }
 }
-.hide-desktop{
+.clean-air.hide-desktop{
     display: none;
-    width: 45px;
+    width: 30px;
+    
+    padding: 0.1em 0.1em;
     margin-left: 10px;
     cursor: pointer;
+}
+
+.cal-arrow-label .hide-desktop{
+    display: none;
+    margin-right: 0;
+    width: 10px;
 }
 
 @media(max-width: 600px){
     .rockets .rocket.hide-mobile{
         display: none;
+    }
+    .cal-arrow-label .hide-mobile{
+        display: none;
+    }
+    .cal-arrow-label .hide-desktop{
+        display: block;
+        text-align: left!important;
     }
     .clean-air.hide-mobile{
         display: none;

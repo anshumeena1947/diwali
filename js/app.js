@@ -2,7 +2,7 @@ require("../css/styles.scss");
 d3 = require("d3")
 _ = require("underscore")
 
-var city_average = 80
+var city_average
 
 // empty array for the intervals
 var intervals = []
@@ -17,45 +17,45 @@ var crackerCounter = {
         'anar':0
     }
 
-// d3.json("http://airquality.hindustantimes.com/widget/map/data",function(error,data){
+d3.json("js/data.json",(function(error, data ) {
+  console.log(data)
+  $('#city_selector').on('change',function(){
+        var city = ($('#city_selector').val())
+        delhi_list = _.chain(data.reports)
+                    .filter(function(e){return (e.station.city == city) && 
+                      (e.recent.pollutants.pm25)
+                    })
+                    .pluck('recent')
+                    .pluck('pollutants')
+                    .pluck('pm25')
+                    .pluck('concentration')
+                    .value()
 
-//   $('#city_selector').on('change',function(){
-//         var city = ($('#city_selector').val())
-//         delhi_list = _.chain(data.reports)
-//                     .filter(function(e){return (e.station.city == city) && 
-//                       (e.recent.pollutants.pm25)
-//                     })
-//                     .pluck('recent')
-//                     .pluck('pollutants')
-//                     .pluck('pm25')
-//                     .pluck('concentration')
-//                     .value()
+        city_average = Math.round(d3.sum(delhi_list)/delhi_list.length)
+        $('.current-level').html(city_average + current_exposure)
+        d3.select('.current-level-line')
+                   .transition()
+                   .duration(1000)
+                    .attr('x',xScale(city_average+current_exposure))
+                   $('.current-level').html(city_average+Math.round(current_exposure));
+        d3.select('.cal-arrow-label')
+          .transition()
+          .duration(1000)
+          .attr('style', "left:"+xScale(city_average+current_exposure)+"px;")
+        updateShareText()
 
-//         city_average = Math.round(d3.sum(delhi_list)/delhi_list.length)
-//         $('.current-level').html(city_average + current_exposure)
-//         d3.select('.current-level-line')
-//                    .transition()
-//                    .duration(1000)
-//                     .attr('x',xScale(city_average+current_exposure))
-//                    $('.current-level').html(city_average+Math.round(current_exposure));
-//         d3.select('.cal-arrow-label')
-//           .transition()
-//           .duration(1000)
-//           .attr('style', "left:"+xScale(city_average+current_exposure)+"px;")
-//         updateShareText()
+  })
+  delhi_list = _.chain(data.reports)
+                    .filter(function(e){return (e.station.city == "Delhi") && 
+                      (e.recent.pollutants.pm25)
+                    })
+                    .pluck('recent')
+                    .pluck('pollutants')
+                    .pluck('pm25')
+                    .pluck('concentration')
+                    .value()
 
-//   })
-//   delhi_list = _.chain(data.reports)
-//                     .filter(function(e){return (e.station.city == "Delhi") && 
-//                       (e.recent.pollutants.pm25)
-//                     })
-//                     .pluck('recent')
-//                     .pluck('pollutants')
-//                     .pluck('pm25')
-//                     .pluck('concentration')
-//                     .value()
-
-//   city_average = Math.round(d3.sum(delhi_list)/delhi_list.length)
+  city_average = Math.round(d3.sum(delhi_list)/delhi_list.length)
   updateShareText()
   var current_exposure = 0
 
@@ -155,7 +155,7 @@ var crackerCounter = {
 
   // update the pm meter with the level
   $('.current-level').html(city_average+current_exposure)
-  
+
   // our lovely crackers
   var cracker_data = [
       {
@@ -353,13 +353,13 @@ var crackerCounter = {
 
     if (!obj){
       if (city_average>200){
-        option = "The pollution in your city is alarmingly high and you haven't even burnt any crackers."
+        option = "The level of pollution in your city is alarming. Do you still want to burn crackers?"
       } else if (city_average>100){
-        option = "The pollution in your city is already really bad. Do you really want to burn crackers?"
+        option = "The air in your city is already polluted. Do you still want to burn crackers?"
       } else if (city_average>60){
-        option = "The pollution in your city is way above safe levels and you haven't even burnt any crackers."
+        option = "Air quality in your city is way above what is deemed safe, even before you have burnt crackers."
       } else {
-        option = "The pollution in your city may not be that high, but choose wisely."
+        option = "Your city might be less polluted than others but choose wisely."
       }
     } else{
       
@@ -381,9 +381,10 @@ var crackerCounter = {
       var second = 'You are now breathing air that is ' + time_text +'.'
       var third = 'That '+obj.cracker+' releases dust that is '+Math.round(obj.pol/40)+' times more than the recommended level.'
       var fourth = 'A single '+obj.cracker+' makes the air around you '+Math.round(obj.pol/city_average)+' times worse.'
-
+      var tweet = fourth
       if (obj.cracker=="snake"){
-        option = ["Snake tablets are 300 times worse than Delhi's average air.","Snake tablets are the worst. Treat them like real snakes. Run away!",first][_.random(0, 2)];
+        option = ["Snake tablets are atleast 300 times worse than Delhi's average air.","Snake tablets are the worst. Treat them like real snakes. Run away!",first][_.random(0, 2)];
+        tweet = ["Snake tablets are 300 times worse than Delhi's average air.","Snake tablets are the worst. Treat them like real snakes. Run away!"][_.random(0, 1)];
       } else if (sum(crackerCounter)==1){
         option = fourth
       } else if (obj.cracker=="anar"){
@@ -391,10 +392,10 @@ var crackerCounter = {
       } else if (sum(crackerCounter)>5){
         option = ['How many crackers will you burn? You have already lighted up '+ sum(crackerCounter)+" of them.",first,second,third,fourth][_.random(0, 4)]
       } else {
-        option = [first,second,third,fourth][_.random(0,3)]
+        option = [first,second,third][_.random(0,2)]
       }
     }
-    $('.share-text').html(option+'<i class="fa fa-twitter" aria-hidden="true"></i>')
+    $('.share-text').html(option+'<a href="http://twitter.com/intent/tweet?url=http://www.hindustantimes.com/static/diwali-crackers-pollution&amp;text='+(tweet?tweet:'How toxic are your favorite firecrackers?')+ '&amp;via=httweets" target="_blank"><i class="fa fa-twitter social-button" aria-hidden="true"></i></a>')
   }
   $('.clean-air').on('click',function(){
     var oldexposure = current_exposure
@@ -454,4 +455,4 @@ var crackerCounter = {
       
   })
 
-// });
+}))
