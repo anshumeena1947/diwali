@@ -2,23 +2,49 @@ require("../css/styles.scss");
 d3 = require("d3")
 _ = require("underscore")
 
-var delhi_average = 80
+var city_average
 
-// d3.json("http://airquality.hindustantimes.com/widget/map/data",function(error,data){
+d3.json("http://airquality.hindustantimes.com/widget/map/data",function(error,data){
 
-//   delhi_list = _.chain(data.reports)
-//                     .filter(function(e){return (e.station.city == "Delhi") && 
-//                       (e.recent.pollutants.pm25)
-//                     })
-//                     .pluck('recent')
-//                     .pluck('pollutants')
-//                     .pluck('pm25')
-//                     .pluck('concentration')
-//                     .value()
+  $('#city_selector').on('change',function(){
+        var city = ($('#city_selector').val())
+        delhi_list = _.chain(data.reports)
+                    .filter(function(e){return (e.station.city == city) && 
+                      (e.recent.pollutants.pm25)
+                    })
+                    .pluck('recent')
+                    .pluck('pollutants')
+                    .pluck('pm25')
+                    .pluck('concentration')
+                    .value()
 
-//   delhi_average = Math.round(d3.sum(delhi_list)/delhi_list.length)
+        city_average = Math.round(d3.sum(delhi_list)/delhi_list.length)
+        $('.current-level').html(city_average + current_exposure)
+        d3.select('.current-level-line')
+                   .transition()
+                   .duration(1000)
+                   .attr('x1',xScale(city_average+current_exposure))
+                   .attr('x2',xScale(city_average+current_exposure))
+                   $('.current-level').html(city_average+Math.round(current_exposure));
+        d3.select('.cal-arrow-label')
+          .transition()
+          .duration(1000)
+          .attr('style', "left:"+xScale(city_average+current_exposure)+"px;")
 
-  var current_exposure = delhi_average
+  })
+  delhi_list = _.chain(data.reports)
+                    .filter(function(e){return (e.station.city == "Delhi") && 
+                      (e.recent.pollutants.pm25)
+                    })
+                    .pluck('recent')
+                    .pluck('pollutants')
+                    .pluck('pm25')
+                    .pluck('concentration')
+                    .value()
+
+  city_average = Math.round(d3.sum(delhi_list)/delhi_list.length)
+
+  var current_exposure = 0
 
   // name our categories
   var scales = [
@@ -56,7 +82,6 @@ var delhi_average = 80
            .ticks((windowWidth<850)?(5):8);
 
   // let's create a chart
-
   var chart = d3.select('.pollution-meter')
                 .append('svg')
                 .attr('height',bar.height*2)
@@ -67,7 +92,6 @@ var delhi_average = 80
                 .attr('transform','translate('+margin.left+',0)')
 
   // append color ranges for the base
-
   chart.selectAll('.marker')
         .data(scales)
         .enter()
@@ -95,26 +119,29 @@ var delhi_average = 80
 
 
   // line for the current meter
-
   chart.append('line')
         .attr('class','current-level-line')
-        .attr('x1',xScale(current_exposure))
-        .attr('x2',xScale(current_exposure))
+        .attr('x1',xScale(city_average+current_exposure))
+        .attr('x2',xScale(city_average+current_exposure))
         .attr('y1',0)
         .attr('y2',bar.height)
         .style('stroke','#fff')
         .style('stroke-width','5')
 
+  // append the axis
   chart.append("g")
      .attr('class','axis')
      .attr("transform", "translate(0,30)")
      .call(xAxis);
 
+  // append the marker
   d3.select('.cal-arrow-label')
-        .attr('style', "left:"+xScale(current_exposure)+"px;")
+        .attr('style', "left:"+xScale(city_average+current_exposure)+"px;")
 
-  $('.current-level').html(current_exposure)
+  // update the pm meter with the level
+  $('.current-level').html(city_average+current_exposure)
 
+  // our lovely crackers
   var cracker_data = [
       {
           'cracker': 'anar',
@@ -154,8 +181,10 @@ var delhi_average = 80
       }
   ]
 
+  // empty array for the intervals
   var intervals = []
 
+  // cracker counter that maintains a total count of all our stuff
   var crackerCounter = {
           'ladi':0,
           'chakri':0,
@@ -165,8 +194,10 @@ var delhi_average = 80
           'anar':0
       }
 
+  // what happens when you click on a cracker
   $('.cracker-con').on('click',function(){
     
+    // find the cracker that you just clicked on
      var obj = _.findWhere(cracker_data,{cracker: ($(this).attr('data-which'))})
       
      crackerCounter[obj.cracker]++;
@@ -177,6 +208,7 @@ var delhi_average = 80
      
      xScale.domain([0,bar.max ])
 
+     updateShareText(obj)
      d3.select('.axis')
      .transition()
      .duration(2000)
@@ -215,11 +247,11 @@ var delhi_average = 80
               d3.select('.current-level-line')
                    .transition()
                    .duration(100)
-                   .attr('x1',xScale(current_exposure))
-                   .attr('x2',xScale(current_exposure))
-                   $('.current-level').html(Math.round(current_exposure));
+                   .attr('x1',xScale(city_average+current_exposure))
+                   .attr('x2',xScale(city_average+current_exposure))
+                   $('.current-level').html(city_average+Math.round(current_exposure));
 
-                $('.cal-arrow-label').css('left',xScale(current_exposure))
+                $('.cal-arrow-label').css('left',xScale(city_average+current_exposure))
 
               }, 100)
           }
@@ -229,13 +261,13 @@ var delhi_average = 80
      d3.select('.current-level-line')
         .transition()
         .duration(1500)
-        .attr('x1',xScale(current_exposure))
-        .attr('x2',xScale(current_exposure))
+        .attr('x1',xScale(city_average+current_exposure))
+        .attr('x2',xScale(city_average+current_exposure))
 
      d3.select('.cal-arrow-label')
         .transition()
         .duration(1500)
-        .attr('style', "left:"+xScale(current_exposure)+"px;")
+        .attr('style', "left:"+xScale(city_average+current_exposure)+"px;")
 
       var back_pos = parseInt($(this).css('background-position').split(' ')[1].split('px')[0])
      var cracker = $(this).attr('data-which')
@@ -323,4 +355,14 @@ var delhi_average = 80
     ]
   });
 
-// });
+  function updateShareText(obj){
+    var option
+    if (sum(crackerCounter)==1){
+      option = 'With that one '+obj.cracker+' you just spiked your pollution levels almost '+Math.round(current_exposure/city_average)+' times.'
+    } else if (sum(crackerCounter)>5){
+      option = 'How many crackers will you burn? You have already lighted up '+ sum(crackerCounter)+" of them."
+    }
+    $('.share-text').html(option+'<i class="fa fa-twitter" aria-hidden="true"></i>')
+  }
+
+});

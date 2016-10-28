@@ -69,7 +69,7 @@ h1 {
       font-size: 2em;
       line-height: 1.3em; } }
 
-.intro {
+.intro, .share-text {
   max-width: 700px;
   text-align: center;
   margin-left: auto;
@@ -79,8 +79,46 @@ h1 {
   line-height: 1.6em;
   color: #ccc; }
   @media (max-width: 750px) {
-    .intro {
+    .intro, .share-text {
       font-size: 1.1em; } }
+
+select {
+  text-align: center;
+  color: #1a1a1a;
+  -webkit-appearance: menulist;
+  -moz-appearance: menulist;
+  appearance: menulist;
+  background: white;
+  -webkit-appearance: menulist;
+  -moz-appearance: menulist;
+  appearance: menulist;
+  padding: 10px !important;
+  font-size: 20px;
+  font-family: "Lato"; }
+
+label {
+  font-size: 0.9em;
+  font-style: italic;
+  display: block;
+  margin-top: 1em;
+  color: #fff; }
+
+#city_selector {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 300px; }
+
+.share-text {
+  max-width: 800px;
+  margin-top: 2em; }
+  .share-text i {
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 1.3em; }
+  .share-text i:hover {
+    color: #fff; }
+  .share-text a {
+    color: inherit; }
 
 h3.byline {
   font-style: italic;
@@ -274,7 +312,8 @@ ul.slick-dots {
   text-align: center;
   font: normal 20px 'Lato',sans-serif;
   padding: 40px;
-  margin-top: 6em; }
+  margin-top: 6em;
+  line-height: 38px; }
   .footer-basic-centered a {
     color: #1a1a1a !important; }
 
