@@ -4,7 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width">
-    <title>What are you being exposed to when you burn these crackers? | Hindustan Times</title>
+    <title>How toxic are your favorite firecrackers? | Hindustan Times</title>
     <!-- google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato:300i,400,400i,700|PT+Serif" rel="stylesheet">
     <!-- stylesheets -->
@@ -23,7 +23,7 @@
     </div>
     <div class = "story">
       <h1>
-          What are you being exposed to when you burn these crackers?
+          How toxic are your favorite firecrackers?
       </h1>
       <h3 class = "byline">
           By Gurman Bhatia
@@ -34,28 +34,36 @@
       <h3 class = "byline dateline">
           28th October, 2016
       </h3>
+      <div class = "rockets">
+        <img src="img/rocket.png" class = "rocket">
+        <img src="img/rocket.png" class = "hide-mobile rocket">
+        <img src="img/rocket.png" class = "hide-mobile rocket">
+      </div>
       <div class = "intro">
-          <p>Every year, air pollution levels spike during Diwali. We built a game that simulates what happens to air around you when you light up different crackers.</p>
+          <p>Diwali is the worst time for India's air. Each time you burst a cracker, it produces a lot of poisonous dust. Scientists call this particulate matter. The tiniest particles (PM 2.5) are the most dangerous.<br></br>How toxic are different crackers? Use our pollution meter to find out.</p>
           <label>Select your city</label>
           <select id="city_selector"><option value="0">Select your city</option><option value="Delhi" selected="selected">Delhi</option><option value="Patna">Patna</option><option value="Gaya">Gaya</option><option value="Kanpur">Kanpur</option><option value="Varanasi">Varanasi</option><option value="Gurgaon">Gurgaon</option><option value="Solapur">Solapur</option><option value="Bengaluru">Bengaluru</option><option value="Chennai">Chennai</option><option value="Mumbai">Mumbai</option><option value="Hyderabad">Hyderabad</option><option value="Pune">Pune</option><option value="Lucknow">Lucknow</option><option value="Kolkata">Kolkata</option><option value="Ahmedabad">Ahmedabad</option><option value="Faridabad">Faridabad</option><option value="Chandrapur">Chandrapur</option><option value="Agra">Agra</option><option value="Jodhpur">Jodhpur</option><option value="Telangana">Telangana</option><option value="Muzaffarpur">Muzaffarpur</option><option value="Jaipur">Jaipur</option><option value="Dehradun">Dehradun</option><option value="Raipur">Raipur</option><option value="Panchkula">Panchkula</option><option value="Gandhinagar">Gandhinagar</option><option value="Bhopal">Bhopal</option><option value="Chandigarh">Chandigarh</option><option value="Ranchi">Ranchi</option><option value="Allahabad">Allahabad</option></select>
       </div>
 
       <div class = "share-text">The pollution in your city is already really bad and you haven't even burnt any crackers.<a href="http://twitter.com/intent/tweet?url=http://www.hindustantimes.com/static/diwali-crackers-pollution&amp;text=How much pollution do different crackers expose you to? &amp;via=httweets" target="_blank"><i class="fa fa-twitter social-button" aria-hidden="true"></i></a></div>
-      <div class = "current-level-container">
-        <p class = 'ins'>PM 2.5 near you</p>
-        <p class = "current-level">
-            
-        </p>
+      <div class="level-container">
+        <div class = "current-level-container">
+          <p class = 'ins'>PM 2.5 near you</p>
+          <p class = "current-level">
+              
+          </p>
+        </div>
+        <div class = "clean-air hide-mobile">Reset</div>
+        <div class = "clean-air hide-desktop"><i class="fa fa-repeat" aria-hidden="true"></i></div>
       </div>
-      <div class = "clean-air">Clean my air</div>
       <div class = "pollution-meter">
           <div class = 'cal-arrow-label cal-move-arrow'>
               <div class = 'cal-label-text'>Pollution around you</div>
               <div class = 'cal-label-arrow'></div>
           </div>
       </div>
-      <div class = "intro">
-          <i><p><span class = "desktop">Click</span><span class = "mobile">Tap</span> on a cracker to burst it and see how that effects the air that you breathe.</p></i>
+      <div class = "intro tap">
+          <i><p><span class = "desktop">Click</span><span class = "mobile">Tap</span> on a cracker to burst it<span class = "desktop"> and see how that effects the air that you breathe</span>.</p></i>
       </div>
 
       <div class = "crackers-container">
@@ -99,7 +107,6 @@
             <div class = "cracker-con" data-which= "snake" data-minus="146">
 
            </div>
-           
         </div>
       </div>
       

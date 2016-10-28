@@ -2,48 +2,60 @@ require("../css/styles.scss");
 d3 = require("d3")
 _ = require("underscore")
 
-var city_average
+var city_average = 80
 
-d3.json("http://airquality.hindustantimes.com/widget/map/data",function(error,data){
+// empty array for the intervals
+var intervals = []
 
-  $('#city_selector').on('change',function(){
-        var city = ($('#city_selector').val())
-        delhi_list = _.chain(data.reports)
-                    .filter(function(e){return (e.station.city == city) && 
-                      (e.recent.pollutants.pm25)
-                    })
-                    .pluck('recent')
-                    .pluck('pollutants')
-                    .pluck('pm25')
-                    .pluck('concentration')
-                    .value()
+// cracker counter that maintains a total count of all our stuff
+var crackerCounter = {
+        'ladi':0,
+        'chakri':0,
+        'fuljhadi':0,
+        'pulpul':0,
+        'snake':0,
+        'anar':0
+    }
 
-        city_average = Math.round(d3.sum(delhi_list)/delhi_list.length)
-        $('.current-level').html(city_average + current_exposure)
-        d3.select('.current-level-line')
-                   .transition()
-                   .duration(1000)
-                   .attr('x1',xScale(city_average+current_exposure))
-                   .attr('x2',xScale(city_average+current_exposure))
-                   $('.current-level').html(city_average+Math.round(current_exposure));
-        d3.select('.cal-arrow-label')
-          .transition()
-          .duration(1000)
-          .attr('style', "left:"+xScale(city_average+current_exposure)+"px;")
-        updateShareText()
+// d3.json("http://airquality.hindustantimes.com/widget/map/data",function(error,data){
 
-  })
-  delhi_list = _.chain(data.reports)
-                    .filter(function(e){return (e.station.city == "Delhi") && 
-                      (e.recent.pollutants.pm25)
-                    })
-                    .pluck('recent')
-                    .pluck('pollutants')
-                    .pluck('pm25')
-                    .pluck('concentration')
-                    .value()
+//   $('#city_selector').on('change',function(){
+//         var city = ($('#city_selector').val())
+//         delhi_list = _.chain(data.reports)
+//                     .filter(function(e){return (e.station.city == city) && 
+//                       (e.recent.pollutants.pm25)
+//                     })
+//                     .pluck('recent')
+//                     .pluck('pollutants')
+//                     .pluck('pm25')
+//                     .pluck('concentration')
+//                     .value()
 
-  city_average = Math.round(d3.sum(delhi_list)/delhi_list.length)
+//         city_average = Math.round(d3.sum(delhi_list)/delhi_list.length)
+//         $('.current-level').html(city_average + current_exposure)
+//         d3.select('.current-level-line')
+//                    .transition()
+//                    .duration(1000)
+//                     .attr('x',xScale(city_average+current_exposure))
+//                    $('.current-level').html(city_average+Math.round(current_exposure));
+//         d3.select('.cal-arrow-label')
+//           .transition()
+//           .duration(1000)
+//           .attr('style', "left:"+xScale(city_average+current_exposure)+"px;")
+//         updateShareText()
+
+//   })
+//   delhi_list = _.chain(data.reports)
+//                     .filter(function(e){return (e.station.city == "Delhi") && 
+//                       (e.recent.pollutants.pm25)
+//                     })
+//                     .pluck('recent')
+//                     .pluck('pollutants')
+//                     .pluck('pm25')
+//                     .pluck('concentration')
+//                     .value()
+
+//   city_average = Math.round(d3.sum(delhi_list)/delhi_list.length)
   updateShareText()
   var current_exposure = 0
 
@@ -73,7 +85,7 @@ d3.json("http://airquality.hindustantimes.com/widget/map/data",function(error,da
   var bar = {width: (windowWidth<850)?(windowWidth*0.9):800, height: 30, max: 400}
   var margin = {top: 5, bottom: 5, left: 5, right: 10}
   // code for my scale
-
+  var mobile_gap = (windowWidth<600)?60:0
   var xScale = d3.scaleLinear()
                  .domain([0,bar.max])
                  .range([0,bar.width])
@@ -120,14 +132,16 @@ d3.json("http://airquality.hindustantimes.com/widget/map/data",function(error,da
 
 
   // line for the current meter
-  chart.append('line')
+  chart.append('rect')
         .attr('class','current-level-line')
-        .attr('x1',xScale(city_average+current_exposure))
-        .attr('x2',xScale(city_average+current_exposure))
-        .attr('y1',0)
-        .attr('y2',bar.height)
-        .style('stroke','#fff')
-        .style('stroke-width','5')
+        .attr('height',bar.height)
+        .attr('width',6)
+        .attr('x',xScale(city_average+current_exposure))
+        .attr('y',0)
+        .style('fill','#fff')
+        .style('stroke-width','1.5')
+        .style('stroke','#1a1a1a')
+
 
   // append the axis
   chart.append("g")
@@ -137,11 +151,11 @@ d3.json("http://airquality.hindustantimes.com/widget/map/data",function(error,da
 
   // append the marker
   d3.select('.cal-arrow-label')
-        .attr('style', "left:"+xScale(city_average+current_exposure)+"px;")
+    .attr('style', "left:"+xScale(city_average+current_exposure)+"px;")
 
   // update the pm meter with the level
   $('.current-level').html(city_average+current_exposure)
-
+  
   // our lovely crackers
   var cracker_data = [
       {
@@ -182,19 +196,6 @@ d3.json("http://airquality.hindustantimes.com/widget/map/data",function(error,da
       }
   ]
 
-  // empty array for the intervals
-  var intervals = []
-
-  // cracker counter that maintains a total count of all our stuff
-  var crackerCounter = {
-          'ladi':0,
-          'chakri':0,
-          'fuljhadi':0,
-          'pulpul':0,
-          'snake':0,
-          'anar':0
-      }
-
   // what happens when you click on a cracker
   $('.cracker-con').on('click',function(){
     
@@ -234,36 +235,29 @@ d3.json("http://airquality.hindustantimes.com/widget/map/data",function(error,da
                return 'translate('+xScale(scales[i-1].max)+',0)'
            }
         })
-     
-      setTimeout(function(){ 
-          console.log(obj.cracker,'finished burning'); 
-      }, (obj.burning * 60 * 1000));
 
-      setTimeout(function(){ 
-          intervals[sum(crackerCounter)-1]={
-            interval: setInterval(function(){
-          
-              current_exposure = current_exposure - ( obj.pol / ( obj.effect * 60 * (10) ) )
+      intervals[sum(crackerCounter)-1]={
+        interval: setInterval(function(){
+      
+          current_exposure = current_exposure - ( obj.pol / ( obj.effect * 60 * (10) ) )
 
-              d3.select('.current-level-line')
-                   .transition()
-                   .duration(100)
-                   .attr('x1',xScale(city_average+current_exposure))
-                   .attr('x2',xScale(city_average+current_exposure))
-                   $('.current-level').html(city_average+Math.round(current_exposure));
+          d3.select('.current-level-line')
+               .transition()
+                .attr('x',xScale(city_average+current_exposure))
+               .duration(100)
+        
+               $('.current-level').html(city_average+Math.round(current_exposure));
 
-                $('.cal-arrow-label').css('left',xScale(city_average+current_exposure))
+            $('.cal-arrow-label').css('left',xScale(city_average+current_exposure))
 
-              }, 100)
-          }
-          cleartimer(intervals[sum(crackerCounter)-1].interval,obj)
-      }, 2000);
+          }, 100)
+      }
+      cleartimer(intervals[sum(crackerCounter)-1].interval,obj)
 
      d3.select('.current-level-line')
         .transition()
         .duration(1500)
-        .attr('x1',xScale(city_average+current_exposure))
-        .attr('x2',xScale(city_average+current_exposure))
+        .attr('x',xScale(city_average+current_exposure))
 
      d3.select('.cal-arrow-label')
         .transition()
@@ -309,9 +303,7 @@ d3.json("http://airquality.hindustantimes.com/widget/map/data",function(error,da
   }
 
   function cleartimer(e,obj){
-    console.log(e,obj)
     setTimeout(function(){
-        console.log(obj.cracker,'finished effect')
         clearInterval(e)
     },obj.effect * 60 * 1000)
   }
@@ -358,47 +350,108 @@ d3.json("http://airquality.hindustantimes.com/widget/map/data",function(error,da
 
   function updateShareText(obj){
     var option
+
     if (!obj){
       if (city_average>200){
         option = "The pollution in your city is alarmingly high and you haven't even burnt any crackers."
       } else if (city_average>100){
-        option = "The pollution in your city is already really bad and you haven't even burnt any crackers."
-      } else if (city_average>50){
+        option = "The pollution in your city is already really bad. Do you really want to burn crackers?"
+      } else if (city_average>60){
         option = "The pollution in your city is way above safe levels and you haven't even burnt any crackers."
       } else {
-        option = "The pollution in your city might not be that high, but choose wisely."
+        option = "The pollution in your city may not be that high, but choose wisely."
       }
-    }else{
-      if (sum(crackerCounter)==1){
-        option = 'With that one '+obj.cracker+' you just spiked your pollution levels almost '+Math.round(current_exposure/city_average)+' times.'
+    } else{
+      
+      var times = Math.round((city_average+current_exposure)/(current_exposure-obj.pol)), time_text;
+
+        if (times==1){
+          time_text = ['even worse','much worse'][_.random(0,1)]
+        } else if (times == 2){
+          time_text = 'twice as bad'
+         
+        } else if (times == 3){
+          time_text = 'thrice as bad'
+        } else {
+          time_text = times + ' times worse'
+        }
+
+      var first = 'You just made the air around you ' + time_text +'.'
+
+      var second = 'You are now breathing air that is ' + time_text +'.'
+      var third = 'That '+obj.cracker+' releases dust that is '+Math.round(obj.pol/40)+' times more than the recommended level.'
+      var fourth = 'A single '+obj.cracker+' makes the air around you '+Math.round(obj.pol/city_average)+' times worse.'
+
+      if (obj.cracker=="snake"){
+        option = ["Snake tablets are 300 times worse than Delhi's average air.","Snake tablets are the worst. Treat them like real snakes. Run away!",first][_.random(0, 2)];
+      } else if (sum(crackerCounter)==1){
+        option = fourth
+      } else if (obj.cracker=="anar"){
+        option = [('That pretty little flowerpot spews dust that is '+Math.round(obj.pol/40)+' times more than the recommended level.'),first,second,third,fourth][_.random(0, 4)];
       } else if (sum(crackerCounter)>5){
-        option = 'How many crackers will you burn? You have already lighted up '+ sum(crackerCounter)+" of them."
+        option = ['How many crackers will you burn? You have already lighted up '+ sum(crackerCounter)+" of them.",first,second,third,fourth][_.random(0, 4)]
+      } else {
+        option = [first,second,third,fourth][_.random(0,3)]
       }
     }
     $('.share-text').html(option+'<i class="fa fa-twitter" aria-hidden="true"></i>')
   }
   $('.clean-air').on('click',function(){
+    var oldexposure = current_exposure
+    
     intervals.forEach(function(e){
       clearInterval(e.interval)
     })
 
     $.each(crackerCounter, function(key, value) {
-      value = 0
+      crackerCounter[key]=0
     });
+
     current_exposure=0
+
+    bar.max = current_exposure+400;
+     
+     xScale.domain([0,bar.max ])
+
+     d3.select('.axis')
+     .transition()
+     .duration(2000)
+     .call(xAxis);
+
+     d3.selectAll('.marker')
+        .transition()
+        .duration(2000)
+        .attr('width',function(d,i){
+           if (i>0){
+              if (i==(scales.length-1)){
+                 return xScale(bar.max - scales[i-1].max)
+              } else {
+                  return xScale(d.max - scales[i-1].max)
+              }
+           } else {
+              return xScale(d.max)
+           }
+        })
+        .attr('transform',function(d,i){
+           if (i>0){
+               return 'translate('+xScale(scales[i-1].max)+',0)'
+           }
+        })
+
     $('.current-level').html(city_average)
     d3.select('.current-level-line')
                .transition()
                .duration(1000)
-               .attr('x1',xScale(city_average))
-               .attr('x2',xScale(city_average))
+               .attr('x',xScale(city_average))
                $('.current-level').html(city_average);
+    
     d3.select('.cal-arrow-label')
       .transition()
       .duration(1000)
       .attr('style', "left:"+xScale(city_average)+"px;")
-    updateShareText()
+      
+      updateShareText()
+      
   })
 
-});
-
+// });

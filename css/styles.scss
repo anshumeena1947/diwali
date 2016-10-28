@@ -14,6 +14,7 @@ body{
     font-family: $font;
     background-color: $back;
     color: #fff;
+    position: relative;
 }
 
 .pollution-meter{
@@ -92,7 +93,7 @@ h1{
 }
 
 .intro, .share-text{
-    max-width: 700px;
+    max-width: 750px;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
@@ -138,6 +139,10 @@ label{
     max-width: 300px;
 }
 
+#city_selector:focus{
+    outline: none;
+}
+
 .share-text{
     max-width: 800px;
     margin-top: 2em;
@@ -173,7 +178,7 @@ h3.byline.malay{
 }
 
 h3.byline.dateline{
-     margin-bottom: 3em;
+     margin-bottom: 2em;
     font-size: 1.1em;
 
 }
@@ -240,7 +245,7 @@ h3.byline.dateline{
     border-radius: 5px;
     padding: 0.5em;
     width: 95%;
-    max-width: 150px;
+    max-width: 120px;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
@@ -271,6 +276,19 @@ h3.byline.dateline{
     }
 }
 
+.rockets{
+    text-align: center;
+    margin-bottom: 2.5em;
+    margin-top: 1em;
+
+    .rocket{
+        display: inline-block;
+        width: 160px;
+        margin-left: 1em;
+        margin-right: 1em;     
+    }
+}
+
 .cal-arrow-label{
     text-align: left;
     position: absolute;
@@ -290,17 +308,27 @@ h3.byline.dateline{
     }
     .cal-label-text{
         @media(max-width: 600px){
-            margin-left: -50px;
             font-size: 0.9em;
             width: 100px;
             text-align: right;
+            
+
+        }
+        @media(max-width: 500px){
+            width: 50px;
+            font-size: 0.8em;
+            /*margin-left: -40px;*/
         }
     }
     @media(max-width: 800px){
         width: 30%;
     }
     @media(max-width: 600px){
-        margin-top: -40px;
+        margin-top: -50px;
+        width: 50px;
+    }
+    @media(max-width: 500px){
+        margin-top: -50px;
     }
 }
 .story{
@@ -405,11 +433,79 @@ footer {
     display: none
 }
 
+.dialog{
+    position: fixed;
+    top: 30%;
+    background: #fff;
+    padding: 2em;
+    max-width: 350px;
+    width: 90%;
+    font-size: 1.2em;
+    left: 35%;
+    border-radius: 5px;
+    color: $back;
+    button{
+        position: absolute;
+        right: 15px;
+        top: 10px;
+
+        background: none;
+        border-style: none;
+        font-size: 25px;
+    }
+    p{
+        width: 90%;
+    }
+}
+
 @media(max-width:450px){
     .desktop{
         display: none
     }
     span.mobile{
         display: inline-block;
+    }
+}
+.hide-desktop{
+    display: none;
+    width: 45px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+@media(max-width: 600px){
+    .rockets .rocket.hide-mobile{
+        display: none;
+    }
+    .clean-air.hide-mobile{
+        display: none;
+    }
+    .clean-air.hide-desktop{
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .current-level-container{
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .level-container{
+        text-align: center;
+    }
+
+    .crackers-container{
+        margin-top: 0.5em;
+    }
+
+    .intro.tap{
+        font-size: 1em;
+    }
+    body{
+        overflow-x: hidden;
+    }
+}
+
+@media(max-width: 800px){
+    .rockets .rocket.hide-tab{
+        display: none;
     }
 }
