@@ -15,7 +15,7 @@ body {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 2em;
-  margin-top: 6em;
+  margin-top: 4em;
   width: 95%; }
   .pollution-meter svg {
     margin-left: auto;
@@ -30,8 +30,7 @@ body {
     fill: #ddd; }
   @media (max-width: 800px) {
     .pollution-meter {
-      margin-bottom: 1em;
-      margin-top: 4em; } }
+      margin-bottom: 1em; } }
 
 .current-level-container {
   text-align: center;

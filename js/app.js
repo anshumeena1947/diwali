@@ -210,14 +210,14 @@ var delhi_average = 80
           intervals[sum(crackerCounter)-1]={
             interval: setInterval(function(){
           
-              current_exposure = Math.round(current_exposure - ( obj.pol / ( obj.effect * 60 * (1/0.1) ) ))
+              current_exposure = current_exposure - ( obj.pol / ( obj.effect * 60 * (10) ) )
 
               d3.select('.current-level-line')
                    .transition()
                    .duration(100)
                    .attr('x1',xScale(current_exposure))
                    .attr('x2',xScale(current_exposure))
-                   $('.current-level').html(current_exposure);
+                   $('.current-level').html(Math.round(current_exposure));
 
                 $('.cal-arrow-label').css('left',xScale(current_exposure))
 
