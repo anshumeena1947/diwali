@@ -31,7 +31,7 @@ body {
   @media (max-width: 800px) {
     .pollution-meter {
       margin-bottom: 1em;
-      margin-top: 2em; } }
+      margin-top: 4em; } }
 
 .current-level-container {
   text-align: center;
@@ -46,6 +46,15 @@ body {
     margin-right: auto;
     padding-bottom: 0.5em;
     border-bottom: 0.5px solid #aaa; }
+  @media (max-width: 600px) {
+    .current-level-container .current-level {
+      font-size: 2em;
+      color: #fff; }
+    .current-level-container .ins {
+      padding-bottom: 0.2em;
+      font-size: 0.9em;
+      width: 120px;
+      border-bottom: 0.5px solid #aaa; } }
 
 h1 {
   font-size: 2.3em;
@@ -190,9 +199,18 @@ h3.byline.dateline {
     border-right: 8px solid transparent;
     border-top: 8px solid #eee;
     margin-top: 7px; }
+  @media (max-width: 600px) {
+    .cal-arrow-label .cal-label-text {
+      margin-left: -50px;
+      font-size: 0.9em;
+      width: 100px;
+      text-align: right; } }
   @media (max-width: 800px) {
     .cal-arrow-label {
       width: 30%; } }
+  @media (max-width: 600px) {
+    .cal-arrow-label {
+      margin-top: -40px; } }
 
 .story {
   padding-top: 4em; }

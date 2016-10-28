@@ -90,7 +90,7 @@
 	  // set the width and height of the meter
 	  var windowWidth = $(window).width()
 	  var bar = {width: (windowWidth<850)?(windowWidth*0.9):800, height: 30, max: 400}
-	  var margin = {top: 5, bottom: 5, left: 5, right: 5}
+	  var margin = {top: 5, bottom: 5, left: 5, right: 10}
 	  // code for my scale
 	
 	  var xScale = d3.scaleLinear()
@@ -99,7 +99,7 @@
 	
 	  // x axis
 	  xAxis = d3.axisBottom(xScale)
-	           .ticks(8);
+	           .ticks((windowWidth<850)?(5):8);
 	
 	  // let's create a chart
 	
