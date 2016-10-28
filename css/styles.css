@@ -100,8 +100,11 @@ label {
   font-size: 0.9em;
   font-style: italic;
   display: block;
-  margin-top: 1em;
+  margin-top: 1.5em;
   color: #fff; }
+  @media (max-width: 750px) {
+    label {
+      margin-top: 1em; } }
 
 #city_selector {
   margin-left: auto;
@@ -188,7 +191,6 @@ h3.byline.dateline {
   transition: left 0.01s; }
 
 .clean-air {
-  margin: 2em;
   border: 1px solid #fff;
   border-radius: 5px;
   padding: 0.5em;
@@ -202,7 +204,8 @@ h3.byline.dateline {
   cursor: pointer;
   -webkit-transition: all 0.3s;
   /* Safari */
-  transition: all 0.3s; }
+  transition: all 0.3s;
+  margin-top: 1em; }
 
 .clean-air:hover {
   color: #fff;
@@ -295,7 +298,8 @@ ul.slick-dots {
 .crackers-container {
   width: 90%;
   margin-left: auto;
-  margin-right: auto; }
+  margin-right: auto;
+  margin-top: 1.5em; }
   @media (max-width: 600px) {
     .crackers-container {
       width: 70%; } }
@@ -330,18 +334,13 @@ footer {
   padding-top: 2em;
   border-top: solid 0.5px rgba(231, 231, 231, 0.3); }
 
-/*.crackers-container.mobile{
-    display: none
-}
+.mobile {
+  display: none; }
 
-
-@media(max-width:450px){
-    .crackers-container.desktop{
-        display: none
-    }
-    .crackers-container.mobile{
-        display: block
-    }
-}*/
+@media (max-width: 450px) {
+  .desktop {
+    display: none; }
+  span.mobile {
+    display: inline-block; } }
 
 /*# sourceMappingURL=styles.css.map*/

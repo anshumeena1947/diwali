@@ -125,8 +125,11 @@ label{
     font-size: 0.9em;
     font-style: italic;
     display: block;
-    margin-top: 1em;
-    color: #fff
+    margin-top: 1.5em;
+    color: #fff;
+    @media(max-width: 750px){
+         margin-top: 1em;
+    }
 }
 
 #city_selector{
@@ -233,7 +236,6 @@ h3.byline.dateline{
 }
 
 .clean-air{
-    margin: 2em;
     border: 1px solid #fff;
     border-radius: 5px;
     padding: 0.5em;
@@ -247,6 +249,7 @@ h3.byline.dateline{
     cursor: pointer;
     -webkit-transition: all 0.3s; /* Safari */
     transition: all 0.3s;
+    margin-top: 1em;
 }
 
 .clean-air:hover{
@@ -358,6 +361,7 @@ ul.slick-dots{
     width: 90%;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 1.5em;
     @media(max-width: 600px){
          width: 70%;
     }
@@ -397,16 +401,15 @@ footer {
     border-top: solid 0.5px rgba(231,231,231,0.3)
 }
 
-/*.crackers-container.mobile{
+.mobile{
     display: none
 }
 
-
 @media(max-width:450px){
-    .crackers-container.desktop{
+    .desktop{
         display: none
     }
-    .crackers-container.mobile{
-        display: block
+    span.mobile{
+        display: inline-block;
     }
-}*/
+}

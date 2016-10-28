@@ -30,6 +30,7 @@ d3.json("http://airquality.hindustantimes.com/widget/map/data",function(error,da
           .transition()
           .duration(1000)
           .attr('style', "left:"+xScale(city_average+current_exposure)+"px;")
+        updateShareText()
 
   })
   delhi_list = _.chain(data.reports)
@@ -43,7 +44,7 @@ d3.json("http://airquality.hindustantimes.com/widget/map/data",function(error,da
                     .value()
 
   city_average = Math.round(d3.sum(delhi_list)/delhi_list.length)
-
+  updateShareText()
   var current_exposure = 0
 
   // name our categories
@@ -346,7 +347,7 @@ d3.json("http://airquality.hindustantimes.com/widget/map/data",function(error,da
         }
       },
       {
-        breakpoint: 480,
+        breakpoint: 550,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1
@@ -357,12 +358,47 @@ d3.json("http://airquality.hindustantimes.com/widget/map/data",function(error,da
 
   function updateShareText(obj){
     var option
-    if (sum(crackerCounter)==1){
-      option = 'With that one '+obj.cracker+' you just spiked your pollution levels almost '+Math.round(current_exposure/city_average)+' times.'
-    } else if (sum(crackerCounter)>5){
-      option = 'How many crackers will you burn? You have already lighted up '+ sum(crackerCounter)+" of them."
+    if (!obj){
+      if (city_average>200){
+        option = "The pollution in your city is alarmingly high and you haven't even burnt any crackers."
+      } else if (city_average>100){
+        option = "The pollution in your city is already really bad and you haven't even burnt any crackers."
+      } else if (city_average>50){
+        option = "The pollution in your city is way above safe levels and you haven't even burnt any crackers."
+      } else {
+        option = "The pollution in your city might not be that high, but choose wisely."
+      }
+    }else{
+      if (sum(crackerCounter)==1){
+        option = 'With that one '+obj.cracker+' you just spiked your pollution levels almost '+Math.round(current_exposure/city_average)+' times.'
+      } else if (sum(crackerCounter)>5){
+        option = 'How many crackers will you burn? You have already lighted up '+ sum(crackerCounter)+" of them."
+      }
     }
     $('.share-text').html(option+'<i class="fa fa-twitter" aria-hidden="true"></i>')
   }
+  $('.clean-air').on('click',function(){
+    intervals.forEach(function(e){
+      clearInterval(e.interval)
+    })
+
+    $.each(crackerCounter, function(key, value) {
+      value = 0
+    });
+    current_exposure=0
+    $('.current-level').html(city_average)
+    d3.select('.current-level-line')
+               .transition()
+               .duration(1000)
+               .attr('x1',xScale(city_average))
+               .attr('x2',xScale(city_average))
+               $('.current-level').html(city_average);
+    d3.select('.cal-arrow-label')
+      .transition()
+      .duration(1000)
+      .attr('style', "left:"+xScale(city_average)+"px;")
+    updateShareText()
+  })
 
 });
+
