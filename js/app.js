@@ -18,7 +18,6 @@ var crackerCounter = {
     }
 
 d3.json("js/data.json",(function(error, data ) {
-  console.log(data)
   $('#city_selector').on('change',function(){
         var city = ($('#city_selector').val())
         delhi_list = _.chain(data.reports)
@@ -363,13 +362,12 @@ d3.json("js/data.json",(function(error, data ) {
       }
     } else{
       
-      var times = Math.round((city_average+current_exposure)/(current_exposure-obj.pol)), time_text;
+      var times = Math.round((city_average+current_exposure)/(city_average+current_exposure-obj.pol)), time_text;
 
         if (times==1){
           time_text = ['even worse','much worse'][_.random(0,1)]
         } else if (times == 2){
           time_text = 'twice as bad'
-         
         } else if (times == 3){
           time_text = 'thrice as bad'
         } else {
@@ -377,20 +375,20 @@ d3.json("js/data.json",(function(error, data ) {
         }
 
       var first = 'You just made the air around you ' + time_text +'.'
-
-      var second = 'You are now breathing air that is ' + time_text +'.'
+      var second = 'You are breathing air that is ' + Math.round((city_average+current_exposure)/40) +' times worse than what is deemed safe.'
       var third = 'That '+obj.cracker+' releases dust that is '+Math.round(obj.pol/40)+' times more than the recommended level.'
       var fourth = 'A single '+obj.cracker+' makes the air around you '+Math.round(obj.pol/city_average)+' times worse.'
+      var fifth = sum(crackerCounter)+' firecrackers later, the air around you is '+ Math.round((city_average+current_exposure)/40) +' times worse than what is deemed safe.'
       var tweet = fourth
       if (obj.cracker=="snake"){
-        option = ["Snake tablets are atleast 300 times worse than Delhi's average air.","Snake tablets are the worst. Treat them like real snakes. Run away!",first][_.random(0, 2)];
+        option = ["Snake tablets are atleast 300 times worse than Delhi's average air.","Snake tablets are the worst. Treat them like real snakes. Run away!",second][_.random(0, 2)];
         tweet = ["Snake tablets are 300 times worse than Delhi's average air.","Snake tablets are the worst. Treat them like real snakes. Run away!"][_.random(0, 1)];
       } else if (sum(crackerCounter)==1){
         option = fourth
       } else if (obj.cracker=="anar"){
-        option = [('That pretty little flowerpot spews dust that is '+Math.round(obj.pol/40)+' times more than the recommended level.'),first,second,third,fourth][_.random(0, 4)];
+        option = [('That pretty little flowerpot spews dust that is '+Math.round(obj.pol/40)+' times more than the recommended level.'),first,second,third][_.random(0, 3)];
       } else if (sum(crackerCounter)>5){
-        option = ['How many crackers will you burn? You have already lighted up '+ sum(crackerCounter)+" of them.",first,second,third,fourth][_.random(0, 4)]
+        option = ['How many crackers will you burn? You have already lighted up '+ sum(crackerCounter)+" of them.",second,third,fifth][_.random(0, 3)]
       } else {
         option = [first,second,third][_.random(0,2)]
       }
