@@ -17,7 +17,7 @@ var crackerCounter = {
         'anar':0
     }
 
-d3.json("js/data.json",(function(error, data ) {
+d3.json("js/data.json?12082017",(function(error, data ) {
   $('#city_selector').on('change',function(){
         var city = ($('#city_selector').val())
         delhi_list = _.chain(data.reports)
