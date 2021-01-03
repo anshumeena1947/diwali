@@ -1,0 +1,38 @@
+{
+    "short_name": "CodeNAnshu",
+    "name": "CodeNanshu: coding and programming",
+    "description": "learn to code and pre code snippets",
+    "icons": [
+      {
+        "src": "https://1.bp.blogspot.com/-uIzqHAJgJGk/X_GWqWT8oBI/AAAAAAAADII/OdA2u2lLa4weqoD_6wKacgupUnAmzUOmwCLcBGAsYHQ/s0/android-icon-192x192.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "https://lh3.googleusercontent.com/-Q9MMl8zesJA/X_GcrVDB4sI/AAAAAAAADKI/3Ecv71_tbREYVeejVpjmboKTW6_ebcoBgCLcBGAsYHQ/logo_codenanshu.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "start_url": "https://wwww.codenanshu.in/",
+    "background_color": "#F5F5F7",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#005AF0",
+    "shortcuts": [
+      {
+        "name": "CodeNanshu",
+        "short_name": "CodeNanshu",
+        "description": "coding and programming",
+        "url": "https://www.codenanshu.in/",
+        "icons": [{ "src": "https://1.bp.blogspot.com/-uIzqHAJgJGk/X_GWqWT8oBI/AAAAAAAADII/OdA2u2lLa4weqoD_6wKacgupUnAmzUOmwCLcBGAsYHQ/s0/android-icon-192x192.png", "sizes": "192x192" }]
+      },
+      {
+        "name": "CodeNanshu",
+        "short_name": "CodeNanshu",
+        "description": "coding and programming",
+        "url": "https://www.codenanshu.in",
+        "icons": [{ "src": "https://1.bp.blogspot.com/-uIzqHAJgJGk/X_GWqWT8oBI/AAAAAAAADII/OdA2u2lLa4weqoD_6wKacgupUnAmzUOmwCLcBGAsYHQ/s0/android-icon-192x192.png", "sizes": "192x192" }]
+      }
+    ]
+  }
